@@ -1,5 +1,8 @@
 package datastructures.hashtable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class HashTable {
     private int size = 7;
     private Node[] dataMap;
@@ -51,5 +54,27 @@ public class HashTable {
             }
             temp.next = newNode;
         }
+    }
+
+    public int get(String key){
+        int index = hash(key);
+        Node temp =  dataMap[index];
+        while (temp != null) {
+            if(temp.key.equals(key)) return temp.value;
+            temp = temp.next;
+        }
+        return 0;
+    }
+
+    public List<String> keys() {
+        List<String> allKeys = new ArrayList<>();
+        for (Node node : dataMap) {
+            Node temp = node;
+            while (temp != null) {
+                allKeys.add(temp.key);
+                temp = temp.next;
+            }
+        }
+        return allKeys;
     }
 }
